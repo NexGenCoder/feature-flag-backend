@@ -10,7 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma:pull": "prisma db pull",
     "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma migrate dev --name init"
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio"
   },
   "keywords": [],
   "author": "",
