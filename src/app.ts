@@ -1,10 +1,23 @@
 import express, { Request, Response } from "express";
+import { PrismaClient } from "@prisma/client";
 
-const app = express();
 const port = 3000;
+const app = express();
+const prisma = new PrismaClient();
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Hello, Express with TypeScript!" });
+app.get("/hello", async (req: Request, res: Response) => {
+  const helloWorldMessageFromDB = await prisma.demo.findFirst({
+    where: {
+      message: "Hello world from database",
+    },
+  });
+
+  res.json({
+    message:
+      helloWorldMessageFromDB?.message ||
+      "Message from db doesn't came please check once",
+    data: helloWorldMessageFromDB,
+  });
 });
 
 app.listen(port, () => {
