@@ -12,7 +12,6 @@ model demo {
   message String @db.VarChar(255)
 }
 
-
 model User {
   id                  String    @id @default(uuid())
   first_name          String    
@@ -31,17 +30,53 @@ model User {
   google_id           String?   @unique
   username            String    @unique
   bio                 String?
+  flags               Flag[]    // Relation to flags created by this user
 
   @@map("users")
 }
 
 model Project {
   id          String    @id @default(uuid())
-  name        String    @db.VarChar(100)    // Maximum 100 characters
-  description String    @db.VarChar(500)    // Maximum 500 characters
+  name        String    @db.VarChar(100)
+  description String    @db.VarChar(500)
   logo        String?
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
+  flags       Flag[]    // Relation to flags in this project
+  environments Environment[] // Relation to environments
 
   @@map("projects")
+}
+
+model Environment {
+  id          String    @id @default(uuid())
+  name        String    @db.VarChar(50)
+  project_id  String    // Foreign key to Project
+  project     Project   @relation(fields: [project_id], references: [id])
+  flags       Flag[]    // Relation to flags in this environment
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  @@unique([name, project_id])  // Ensure environment names are unique within a project
+  @@map("environments")
+}
+
+model Flag {
+  id             String      @id @default(uuid())
+  name           String      @db.VarChar(100)
+  description    String      @db.VarChar(500)
+  key            String      @db.VarChar(100)
+  project_id     String      // Foreign key to Project
+  project        Project     @relation(fields: [project_id], references: [id])
+  environment_id String      // Foreign key to Environment
+  environment    Environment @relation(fields: [environment_id], references: [id])
+  is_active      Boolean     @default(false)
+  created_at     DateTime    @default(now())
+  updated_at     DateTime    @updatedAt
+  expires_at     DateTime?   // Optional expiration time
+  added_by       String      // Foreign key to User
+  added_by_user  User        @relation(fields: [added_by], references: [id])
+
+  @@unique([key, project_id, environment_id])  // Ensure keys are unique within a project-environment combination
+  @@map("flags")
 }
