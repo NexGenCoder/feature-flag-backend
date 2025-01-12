@@ -34,8 +34,8 @@ export default [
          'no-duplicate-imports': 'error',
          'no-unused-vars': 'off', // Turned off in favor of @typescript-eslint/no-unused-vars
          semi: ['error', 'always'],
-         quotes: ['error', 'double'],
-         indent: ['error', 2],
+         quotes: ['error', 'single'],
+         indent: ['error', 3],
       },
    },
 ]
