@@ -1,3 +1,18 @@
-/node_modules
+# dist
 /dist
+
+# modules
+/node_modules
+
+
+# env
 .env
+
+# Yarn errors
+.yarn/*
+
+# test coverage
+/coverage
+
+# database folder
+/db
