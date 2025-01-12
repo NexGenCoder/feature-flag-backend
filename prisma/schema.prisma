@@ -34,3 +34,14 @@ model User {
 
   @@map("users")
 }
+
+model Project {
+  id          String    @id @default(uuid())
+  name        String    @db.VarChar(100)    // Maximum 100 characters
+  description String    @db.VarChar(500)    // Maximum 500 characters
+  logo        String?
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+
+  @@map("projects")
+}

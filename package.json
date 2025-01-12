@@ -20,7 +20,7 @@
       "fix": "pnpm lint:fix && pnpm prettier:fix",
       "prisma:pull": "prisma db pull",
       "prisma:generate": "prisma generate",
-      "prisma:migrate": "prisma migrate dev --name init",
+      "prisma:migrate": "prisma migrate dev",
       "prisma:deploy": "prisma migrate deploy",
       "prisma:studio": "prisma studio"
    },
