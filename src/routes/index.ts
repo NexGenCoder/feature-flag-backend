@@ -1,6 +1,11 @@
 import express from 'express';
-const router = express.Router();
-import helloRouter from './hello';
-router.use('/hello', helloRouter);
+import health from './health';
+import flags from './flags';
 
-export default router;
+const router = express.Router();
+
+export default (): express.Router => {
+   flags(router);
+   health(router);
+   return router;
+};

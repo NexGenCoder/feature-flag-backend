@@ -22,7 +22,6 @@ export default [
       rules: {
          // TypeScript specific rules
          '@typescript-eslint/no-explicit-any': 'warn',
-         '@typescript-eslint/explicit-function-return-type': 'warn',
          '@typescript-eslint/no-unused-vars': [
             'error',
             { argsIgnorePattern: '^_' },
