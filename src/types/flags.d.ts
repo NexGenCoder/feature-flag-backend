@@ -5,9 +5,9 @@ export interface IFlag {
    key: string;
    project_id: string;
    environment_id: string;
-   is_Active: boolean;
-   expires_At: Date | null;
-   created_At: string;
-   updated_At: string;
+   is_active: boolean;
+   expires_at: Date | null;
+   created_at: string;
+   updated_at: string;
    added_by: string;
 }
