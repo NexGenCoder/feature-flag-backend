@@ -4,7 +4,7 @@ import { prisma } from '..';
 export default (router: express.Router) => {
    router.get('/health', async (req: Request, res: Response) => {
       try {
-         await prisma.$queryRaw`SELECT 1`;
+         await prisma.$queryRaw`SELECT * FROM demo WHERE message='Hello World' LIMIT 1 `;
 
          res.json({
             status: 'healthy',
