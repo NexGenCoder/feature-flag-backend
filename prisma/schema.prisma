@@ -31,6 +31,7 @@ model User {
   username            String    @unique
   bio                 String?
   flags               Flag[]    // Relation to flags created by this user
+  projects            Project[] // Relation to projects created by this user
 
   @@map("users")
 }
@@ -40,6 +41,8 @@ model Project {
   name        String    @db.VarChar(100)
   description String    @db.VarChar(500)
   logo        String?
+  created_by  String    // Foreign key to User
+  created_by_user User  @relation(fields: [created_by], references: [id])
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
   flags       Flag[]    // Relation to flags in this project
